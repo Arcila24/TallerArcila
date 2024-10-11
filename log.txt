@@ -1,0 +1,750 @@
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop
+$ git init TallerArcila
+Initialized empty Git repository in C:/Users/Arcila24/Desktop/TallerArcila/.git/
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop
+$ cd TallerArcila/
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git config --global user.name "Arcila24"
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git config --global user.email "brayan-arcila@hotmail.com"
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git checkout -b feature
+Switched to a new branch 'feature'
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git branch
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ echo "Texto inicial" > archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git add archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the n
+ext time Git touches it
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git commit -m "Commit inicial"
+[feature (root-commit) 6250989] Commit inicial
+ 1 file changed, 1 insertion(+)
+ create mode 100644 archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ echo "Texto agregado en feature" >> archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git commit -am "Segundo commit en feature"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the n
+ext time Git touches it
+[feature 540cf3a] Segundo commit en feature
+ 1 file changed, 1 insertion(+)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ echo "Tercer commit en feature" >> archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git commit -am "Tercer commit en feature"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the n
+ext time Git touches it
+[feature 1481d27] Tercer commit en feature
+ 1 file changed, 1 insertion(+)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git checkout master
+error: pathspec 'master' did not match any file(s) known to git
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git checkout -b master
+Switched to a new branch 'master'
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git branch
+  feature
+* master
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git merge feature
+Already up to date.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git reset --hard HEAD~1
+HEAD is now at 540cf3a Segundo commit en feature
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git rebase feature
+Successfully rebased and updated refs/heads/master.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (hotfix)
+$ echo "Correcion urgente" >> archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (hotfix)
+$ got commit -am "Hotfix"
+bash: got: command not found
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (hotfix)
+$ git commit -am "Hotfix"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the n
+ext time Git touches it
+[hotfix a7e46b8] Hotfix
+ 1 file changed, 1 insertion(+)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (hotfix)
+$ git checkout master
+Switched to branch 'master'
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git cherry-pick hotfix
+[master 7fd8ae8] Hotfix
+ Date: Thu Oct 10 20:39:22 2024 -0500
+ 1 file changed, 1 insertion(+)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git reflog
+7fd8ae8 (HEAD -> master) HEAD@{0}: cherry-pick: Hotfix
+1481d27 (feature) HEAD@{1}: checkout: moving from hotfix to master
+a7e46b8 (hotfix) HEAD@{2}: commit: Hotfix
+1481d27 (feature) HEAD@{3}: checkout: moving from master to hotfix
+1481d27 (feature) HEAD@{4}: rebase (finish): returning to refs/heads/master
+1481d27 (feature) HEAD@{5}: rebase (start): checkout feature
+540cf3a HEAD@{6}: reset: moving to HEAD~1
+1481d27 (feature) HEAD@{7}: checkout: moving from feature to master
+1481d27 (feature) HEAD@{8}: commit: Tercer commit en feature
+540cf3a HEAD@{9}: commit: Segundo commit en feature
+6250989 HEAD@{10}: commit (initial): Commit inicial
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git cherry-pick 540cf3a
+Auto-merging archivo.txt
+CONFLICT (content): Merge conflict in archivo.txt
+error: could not apply 540cf3a... Segundo commit en feature
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm <pathspec>", then run
+hint: "git cherry-pick --continue".
+hint: You can instead skip this commit with "git cherry-pick --skip".
+hint: To abort and get back to the state before "git cherry-pick",
+hint: run "git cherry-pick --abort".
+hint: Disable this message with "git config advice.mergeConflict false"
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git checkout HEAD@{9}
+archivo.txt: needs merge
+error: you need to resolve your current index first
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git cherry-pick 540cf3a
+error: Cherry-picking is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: cherry-pick failed
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git add archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git merge continue
+fatal: You have not concluded your cherry-pick (CHERRY_PICK_HEAD exists).
+Please, commit your changes before you merge.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (all conflicts fixed: run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Changes to be committed:
+        modified:   archivo.txt
+
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git merge continue
+fatal: You have not concluded your cherry-pick (CHERRY_PICK_HEAD exists).
+Please, commit your changes before you merge.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git merge continue
+fatal: You have not concluded your cherry-pick (CHERRY_PICK_HEAD exists).
+Please, commit your changes before you merge.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git cherry-pick --continue
+[master 0149a40] Segundo commit en feature
+ Date: Thu Oct 10 20:31:52 2024 -0500
+ 1 file changed, 1 insertion(+)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git reflog
+0149a40 (HEAD -> master) HEAD@{0}: commit (cherry-pick): Segundo commit en featu
+re
+7fd8ae8 HEAD@{1}: cherry-pick: Hotfix
+1481d27 (feature) HEAD@{2}: checkout: moving from hotfix to master
+a7e46b8 (hotfix) HEAD@{3}: commit: Hotfix
+1481d27 (feature) HEAD@{4}: checkout: moving from master to hotfix
+1481d27 (feature) HEAD@{5}: rebase (finish): returning to refs/heads/master
+1481d27 (feature) HEAD@{6}: rebase (start): checkout feature
+540cf3a HEAD@{7}: reset: moving to HEAD~1
+1481d27 (feature) HEAD@{8}: checkout: moving from feature to master
+1481d27 (feature) HEAD@{9}: commit: Tercer commit en feature
+540cf3a HEAD@{10}: commit: Segundo commit en feature
+6250989 HEAD@{11}: commit (initial): Commit inicial
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git cherry-pick 540cf3a
+Auto-merging archivo.txt
+CONFLICT (content): Merge conflict in archivo.txt
+error: could not apply 540cf3a... Segundo commit en feature
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm <pathspec>", then run
+hint: "git cherry-pick --continue".
+hint: You can instead skip this commit with "git cherry-pick --skip".
+hint: To abort and get back to the state before "git cherry-pick",
+hint: run "git cherry-pick --abort".
+hint: Disable this message with "git config advice.mergeConflict false"
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git cherry-pick --continue
+U       archivo.txt
+error: Committing is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git merge continue
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ ls
+archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   archivo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git add .
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git status
+On branch master
+You are currently cherry-picking commit 540cf3a.
+  (all conflicts fixed: run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Changes to be committed:
+        modified:   archivo.txt
+
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git merge continue
+fatal: You have not concluded your cherry-pick (CHERRY_PICK_HEAD exists).
+Please, commit your changes before you merge.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|CHERRY-PICKING)
+$ git cherry-pick --continue
+[master 637bed8] Segundo commit en feature
+ Date: Thu Oct 10 20:31:52 2024 -0500
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ ls
+archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ code archivo.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git reflog
+637bed8 (HEAD -> master) HEAD@{0}: commit (cherry-pick): Segundo commit en feature
+0149a40 HEAD@{1}: commit (cherry-pick): Segundo commit en feature
+7fd8ae8 HEAD@{2}: cherry-pick: Hotfix
+1481d27 (feature) HEAD@{3}: checkout: moving from hotfix to master
+a7e46b8 (hotfix) HEAD@{4}: commit: Hotfix
+1481d27 (feature) HEAD@{5}: checkout: moving from master to hotfix
+1481d27 (feature) HEAD@{6}: rebase (finish): returning to refs/heads/master
+1481d27 (feature) HEAD@{7}: rebase (start): checkout feature
+540cf3a HEAD@{8}: reset: moving to HEAD~1
+1481d27 (feature) HEAD@{9}: checkout: moving from feature to master
+1481d27 (feature) HEAD@{10}: commit: Tercer commit en feature
+540cf3a HEAD@{11}: commit: Segundo commit en feature
+6250989 HEAD@{12}: commit (initial): Commit inicial
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git log
+commit 637bed87655ec2c1edbfa0b07739b8e1a6fc21e8 (HEAD -> master)
+Author: Arcila24 <brayan-arcila@hotmail.com>
+Date:   Thu Oct 10 20:31:52 2024 -0500
+
+    Segundo commit en feature
+
+commit 0149a404b239c5201e0ccc434008642525e26e23
+Author: Arcila24 <brayan-arcila@hotmail.com>
+Date:   Thu Oct 10 20:31:52 2024 -0500
+
+    Segundo commit en feature
+
+commit 7fd8ae83efec77e4f9ff1e5f1feff3f999923c8a
+Author: Arcila24 <brayan-arcila@hotmail.com>
+Date:   Thu Oct 10 20:39:22 2024 -0500
+
+    Hotfix
+
+commit 1481d27fa91d452fa37f69f8a95d8fbbfec7ee95 (feature)
+Author: Arcila24 <brayan-arcila@hotmail.com>
+Date:   Thu Oct 10 20:33:12 2024 -0500
+
+    Tercer commit en feature
+
+commit 540cf3ad456a049dfb8d867c307dc1584f4c2429
+Author: Arcila24 <brayan-arcila@hotmail.com>
+Date:   Thu Oct 10 20:31:52 2024 -0500
+
+    Segundo commit en feature
+
+commit 6250989b9322bf268190007ff78bcedc436f591a
+Author: Arcila24 <brayan-arcila@hotmail.com>
+Date:   Thu Oct 10 20:29:59 2024 -0500
+
+    Commit inicial
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git log --oneline
+637bed8 (HEAD -> master) Segundo commit en feature
+0149a40 Segundo commit en feature
+7fd8ae8 Hotfix
+1481d27 (feature) Tercer commit en feature
+540cf3a Segundo commit en feature
+6250989 Commit inicial
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git checkout feature
+Switched to branch 'feature'
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ echo "Cambio en feature" > conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git commit -am "Cambio en feature"
+On branch feature
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        conflicto.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the
+ next time Git touches it
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ ls
+archivo.txt  conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ code conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git add conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ ls
+archivo.txt  conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ code conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git commit -am "Cambio en feature"
+[feature e576344] Cambio en feature
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ code conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git checkout master
+Switched to branch 'master'
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ echo "Cambio en master" > conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the
+ next time Git touches it
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git commit -am "Cambio en master"
+[master f7ee8d3] Cambio en master
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git merge feature
+Auto-merging conflicto.txt
+CONFLICT (add/add): Merge conflict in conflicto.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|MERGING)
+$ code conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|MERGING)
+$ git add conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master|MERGING)
+$ git commit -m "Solucionando conflicto"
+[master 9193268] Solucionando conflicto
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git remote add origin https://github.com/Arcila24/TallerArcila.git
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push -u origin master
+Enumerating objects: 27, done.
+Counting objects: 100% (27/27), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (16/16), done.
+Writing objects: 100% (27/27), 2.21 KiB | 565.00 KiB/s, done.
+Total 27 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (4/4), done.
+To https://github.com/Arcila24/TallerArcila.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push -u origin feature
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'feature' on GitHub by visiting:
+remote:      https://github.com/Arcila24/TallerArcila/pull/new/feature
+remote:
+To https://github.com/Arcila24/TallerArcila.git
+ * [new branch]      feature -> feature
+branch 'feature' set up to track 'origin/feature'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push -u origin hotfix
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 309 bytes | 309.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'hotfix' on GitHub by visiting:
+remote:      https://github.com/Arcila24/TallerArcila/pull/new/hotfix
+remote:
+To https://github.com/Arcila24/TallerArcila.git
+ * [new branch]      hotfix -> hotfix
+branch 'hotfix' set up to track 'origin/hotfix'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git branch
+  feature
+  hotfix
+* master
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push -u origin hotfix
+branch 'hotfix' set up to track 'origin/hotfix'.
+Everything up-to-date
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git checkout gotfix
+error: pathspec 'gotfix' did not match any file(s) known to git
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git checkout hotfix
+Switched to branch 'hotfix'
+Your branch is up to date with 'origin/hotfix'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (hotfix)
+$ git status
+On branch hotfix
+Your branch is up to date with 'origin/hotfix'.
+
+nothing to commit, working tree clean
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (hotfix)
+$ git checkout feature
+Switched to branch 'feature'
+Your branch is up to date with 'origin/feature'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git status
+On branch feature
+Your branch is up to date with 'origin/feature'.
+
+nothing to commit, working tree clean
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (feature)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ touch README,md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ ls
+README,md  archivo.txt  conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git checkout master
+Already on 'master'
+Your branch is up to date with 'origin/master'.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ rm README.md
+rm: cannot remove 'README.md': No such file or directory
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ ls
+README,md  archivo.txt  conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git mv README,md README.md
+fatal: not under version control, source=README,md, destination=README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git rm README,md
+fatal: pathspec 'README,md' did not match any files
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ rm README,md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ ls
+archivo.txt  conflicto.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ touch README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ code README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git add REAMDE.md
+fatal: pathspec 'REAMDE.md' did not match any files
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git commit -m "Creando archivo README.md con los pasos"
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ code README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git add README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git commit -m "Creando archivo README.md con los pasos"
+[master 6da3016] Creando archivo README.md con los pasos
+ 1 file changed, 24 insertions(+)
+ create mode 100644 README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push
+To https://github.com/Arcila24/TallerArcila.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/Arcila24/TallerArcila.git
+'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push -u origin master
+To https://github.com/Arcila24/TallerArcila.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/Arcila24/TallerArcila.git
+'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git pull origin master
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 1.80 KiB | 13.00 KiB/s, done.
+From https://github.com/Arcila24/TallerArcila
+ * branch            master     -> FETCH_HEAD
+   9193268..ecdb147  master     -> origin/master
+Merge made by the 'ort' strategy.
+ archivo.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.38 KiB | 1.38 MiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Arcila24/TallerArcila.git
+   ecdb147..e8de14f  master -> master
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ code README.md
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ touch log.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$ code log.txt
+
+Arcila24@DESKTOP-DTIMPR7 MINGW64 ~/Desktop/TallerArcila (master)
+$
